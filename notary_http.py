@@ -126,13 +126,13 @@ class NotaryHTTPServer:
                     ts_elem.setAttribute("start", str(ts_start))
                     key_elem.appendChild(ts_elem)
                     ts_bytes += struct.pack("BBBB", ts_start >> 24 & 255,
-                        ts_start >> 16 & 255,
-                        ts_start >> 8 & 255,
-                        ts_start & 255)
+                            ts_start >> 16 & 255,
+                            ts_start >> 8 & 255,
+                            ts_start & 255)
                     ts_bytes += struct.pack("BBBB", ts_end >> 24 & 255,
-                        ts_end >> 16 & 255,
-						ts_end >> 8 & 255,
-						ts_end & 255)
+                            ts_end >> 16 & 255,
+                            ts_end >> 8 & 255,
+                            ts_end & 255)
                 packed_data =(head + fp_bytes + ts_bytes) + packed_data  
         
             packed_data = service_id.encode() + struct.pack("B", 0) + packed_data
@@ -190,10 +190,10 @@ if len(sys.argv) != 3:
     exit(1)
 
 cherrypy.config.update({ 'server.socket_port' : 8080,
-             'server.socket_host' : "0.0.0.0",
-             'request.show_tracebacks' : False, 
-             'log.access_file' : None,  # default for production
-             'log.error_file' : 'error.log',
-             'log.screen' : False } )
+        'server.socket_host' : "0.0.0.0",
+        'request.show_tracebacks' : False, 
+        'log.access_file' : None,  # default for production
+        'log.error_file' : 'error.log',
+        'log.screen' : False } )
 cherrypy.quickstart(NotaryHTTPServer(sys.argv[1], sys.argv[2]))
 
